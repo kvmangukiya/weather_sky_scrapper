@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_sky_scrapper/controllers/current_weather_provider.dart';
 import 'package:weather_sky_scrapper/views/screens/home_screen.dart';
 import 'controllers/theme_provider.dart';
 import 'views/screens/splash_screen.dart';
@@ -9,7 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        // ChangeNotifierProvider(create: (context) => GitaProvider()),
+        ChangeNotifierProvider(create: (context) => CurrentWeatherProvider()),
       ],
       child: const MyApp(),
     ),

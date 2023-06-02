@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import '../../models/color_model.dart';
+import 'city_weather.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/theme_provider.dart';
-import '../../models/colorModel.dart';
 import '../../utils/functions.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// widget list
   final List<Widget> bottomBarPages = [
-    const Page1(),
+    const CityWeather(),
     const Page2(),
     const Page3(),
   ];
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ? AnimatedNotchBottomBar(
               /// Provide NotchBottomBarController
               notchBottomBarController: _controller,
-              color: ColorModel.bottomNavigationBarBkgColor,
+              color: ColorModel.primaryColor,
               showLabel: false,
               notchColor: ColorModel.notchColor,
 
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   activeItem: Icon(
                     Icons.home_filled,
-                    color: ColorModel.bottomNavigationBarBkgColor,
+                    color: ColorModel.primaryColor,
                   ),
                   itemLabel: 'Page 1',
                 ),
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   activeItem: Icon(
                     Icons.saved_search,
-                    color: ColorModel.bottomNavigationBarBkgColor,
+                    color: ColorModel.primaryColor,
                   ),
                   itemLabel: 'Page 2',
                 ),
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   activeItem: Icon(
                     Icons.settings,
-                    color: ColorModel.bottomNavigationBarBkgColor,
+                    color: ColorModel.primaryColor,
                   ),
                   itemLabel: 'Page 3',
                 ),
@@ -100,17 +100,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : null,
     );
-  }
-}
-
-class Page1 extends StatelessWidget {
-  const Page1({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: ColorModel.pageBkgColor,
-        child: const Center(child: Text('Page 1')));
   }
 }
 
