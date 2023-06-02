@@ -3,6 +3,7 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/theme_provider.dart';
+import '../../models/colorModel.dart';
 import '../../utils/functions.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,45 +49,45 @@ class _HomeScreenState extends State<HomeScreen> {
           ? AnimatedNotchBottomBar(
               /// Provide NotchBottomBarController
               notchBottomBarController: _controller,
-              color: Colors.white,
+              color: ColorModel.bottomNavigationBarBkgColor,
               showLabel: false,
-              notchColor: Colors.black87,
+              notchColor: ColorModel.notchColor,
 
               /// restart app if you change removeMargins
               removeMargins: false,
               bottomBarWidth: 500,
               durationInMilliSeconds: 300,
-              bottomBarItems: const [
+              bottomBarItems: [
                 BottomBarItem(
                   inActiveItem: Icon(
                     Icons.home_filled,
-                    color: Colors.blueGrey,
+                    color: ColorModel.notchColor,
                   ),
                   activeItem: Icon(
                     Icons.home_filled,
-                    color: Colors.blueAccent,
+                    color: ColorModel.bottomNavigationBarBkgColor,
                   ),
                   itemLabel: 'Page 1',
                 ),
                 BottomBarItem(
                   inActiveItem: Icon(
-                    Icons.star,
-                    color: Colors.blueGrey,
+                    Icons.saved_search,
+                    color: ColorModel.notchColor,
                   ),
                   activeItem: Icon(
-                    Icons.star,
-                    color: Colors.blueAccent,
+                    Icons.saved_search,
+                    color: ColorModel.bottomNavigationBarBkgColor,
                   ),
                   itemLabel: 'Page 2',
                 ),
                 BottomBarItem(
                   inActiveItem: Icon(
                     Icons.settings,
-                    color: Colors.blueGrey,
+                    color: ColorModel.notchColor,
                   ),
                   activeItem: Icon(
                     Icons.settings,
-                    color: Colors.pink,
+                    color: ColorModel.bottomNavigationBarBkgColor,
                   ),
                   itemLabel: 'Page 3',
                 ),
@@ -108,7 +109,7 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: const Color.fromRGBO(193, 139, 217, 1),
+        color: ColorModel.pageBkgColor,
         child: const Center(child: Text('Page 1')));
   }
 }
@@ -119,7 +120,8 @@ class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.green, child: const Center(child: Text('Page 2')));
+        color: ColorModel.pageBkgColor,
+        child: const Center(child: Text('Page 2')));
   }
 }
 
@@ -129,6 +131,7 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.blue, child: const Center(child: Text('Page 3')));
+        color: ColorModel.pageBkgColor,
+        child: const Center(child: Text('Page 3')));
   }
 }
