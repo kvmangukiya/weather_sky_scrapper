@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: const ColorScheme.light(),
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.purple,
         ),
         darkTheme: ThemeData(
           useMaterial3: true,

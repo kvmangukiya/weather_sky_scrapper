@@ -43,15 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: ColorModel.pageBkgColor,
             image: DecorationImage(
-                image: AssetImage("assets/images/citybkg.jpg"),
-                fit: BoxFit.fitHeight),
+              image: AssetImage(ColorModel.cityBkg),
+              fit: BoxFit.fitHeight,
+            ),
           ),
           child: PageView(
             controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: List.generate(
                 bottomBarPages.length, (index) => bottomBarPages[index]),
           ),
@@ -69,9 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 removeMargins: false,
                 bottomBarWidth: 500,
                 durationInMilliSeconds: 300,
-                bottomBarItems: const [
+                bottomBarItems: [
                   BottomBarItem(
-                    inActiveItem: Icon(
+                    inActiveItem: const Icon(
                       Icons.home_filled,
                       color: ColorModel.notchColor,
                     ),
@@ -82,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemLabel: 'Page 1',
                   ),
                   BottomBarItem(
-                    inActiveItem: Icon(
+                    inActiveItem: const Icon(
                       Icons.saved_search,
                       color: ColorModel.notchColor,
                     ),
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemLabel: 'Page 2',
                   ),
                   BottomBarItem(
-                    inActiveItem: Icon(
+                    inActiveItem: const Icon(
                       Icons.settings,
                       color: ColorModel.notchColor,
                     ),

@@ -15,11 +15,12 @@ class Settings extends StatelessWidget {
       builder: (context, themeProvider, child) => Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: ColorModel.pageBkgColor,
           image: DecorationImage(
-              image: AssetImage("assets/images/citybkg.jpg"),
-              fit: BoxFit.fitHeight),
+            image: AssetImage(ColorModel.cityBkg),
+            fit: BoxFit.fitHeight,
+          ),
         ),
         child: Column(
           children: [
@@ -72,24 +73,13 @@ class Settings extends StatelessWidget {
                     themeProvider.isDark
                         ? Icons.light_mode_rounded
                         : Icons.dark_mode_rounded,
-                    color: (themeProvider.isDark)
-                        ? Colors.white
-                        : ColorModel.primaryColor,
+                    color: ColorModel.primaryColor,
                   ),
-                  title: appText(
-                      text: "Theme",
-                      fw: FontWeight.w500,
-                      size: 20,
-                      color: (themeProvider.isDark)
-                          ? Colors.white
-                          : ColorModel.primaryColor),
+                  title: appText(text: "Theme", fw: FontWeight.w500, size: 20),
                   subtitle: appText(
                       text:
                           (themeProvider.isDark) ? "Dark Theme" : "Light Theme",
-                      size: 16,
-                      color: (themeProvider.isDark)
-                          ? Colors.white
-                          : ColorModel.primaryColor),
+                      size: 16),
                   trailing: Switch(
                     value: themeProvider.isDark,
                     onChanged: (bool value) {

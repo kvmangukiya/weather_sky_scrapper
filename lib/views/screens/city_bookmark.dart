@@ -23,102 +23,129 @@ class _CityBookMarkState extends State<CityBookMark> {
         padding: const EdgeInsets.all(16),
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: ColorModel.pageBkgColor,
           image: DecorationImage(
-              image: AssetImage("assets/images/citybkg.jpg"),
-              fit: BoxFit.fitHeight),
+            image: AssetImage(ColorModel.cityBkg),
+            fit: BoxFit.fitHeight,
+          ),
         ),
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              height: 60,
-              child: TextFormField(
-                controller: search,
-                textInputAction: TextInputAction.done,
-                textCapitalization: TextCapitalization.sentences,
-                style: const TextStyle().copyWith(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: ColorModel.primaryColor),
-                decoration: InputDecoration(
-                  hintText: "Search for a city",
-                  hintStyle: const TextStyle()
-                      .copyWith(color: Colors.white.withOpacity(0.7)),
-                  border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      borderSide: BorderSide(color: ColorModel.primaryColor)),
-                  enabledBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      borderSide: BorderSide(
-                          color: ColorModel.primaryColor, width: 1.5)),
-                  suffixIcon: IconButton(
-                    color: ColorModel.primaryColor,
-                    icon: const Icon(Icons.search_outlined),
-                    onPressed: () {
-                      setState(() {});
-                    },
-                  ),
-                  labelStyle: const TextStyle().copyWith(color: Colors.grey),
-                  contentPadding: const EdgeInsets.all(12),
-                ),
-              ),
-            ),
-            Expanded(
-              child: search.text == ""
-                  ? (themeProvider.cityBookMark.isNotEmpty)
-                      ? SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            children: themeProvider.cityBookMark.map((e) {
-                              return (e != "")
-                                  ? bookMarkCityWeather(context, e)
-                                  : const SizedBox();
-                            }).toList(),
-                          ),
-                        )
-                      : Center(
-                          child: appText(text: "No one bookmark exist..."),
-                        )
-                  : Consumer<SearchCityProvider>(
-                      builder: (context, scp, child) => FutureBuilder(
-                        future: scp.searchCity(search.text),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return (snapshot.data!.isNotEmpty)
-                                ? SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    child: Column(
-                                      children: snapshot.data!.map((e) {
-                                        return (e.url != null)
-                                            ? bookMarkCityWeather(
-                                                context, e.url as String)
-                                            : const SizedBox();
-                                      }).toList(),
-                                    ),
-                                  )
-                                : Center(
-                                    child: appText(text: "Data not found..."),
-                                  );
-                          } else if (snapshot.hasError) {
-                            return Center(
-                              child: Text(snapshot.error.toString()),
-                            );
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(
-                                  color: ColorModel.primaryColor),
-                            );
-                          }
-                        },
+        child: ThemeProvider.internet
+            ? Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    height: 60,
+                    child: TextField(
+                      controller: search,
+                      onSubmitted: (val) {
+                        setState(() {});
+                      },
+                      textInputAction: TextInputAction.done,
+                      textCapitalization: TextCapitalization.words,
+                      style: const TextStyle().copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: ColorModel.primaryColor),
+                      decoration: InputDecoration(
+                        hintText: "Search for a city",
+                        hintStyle: const TextStyle().copyWith(
+                            color: ColorModel.primaryColor.withOpacity(0.5)),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            borderSide:
+                                BorderSide(color: ColorModel.primaryColor)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            borderSide: BorderSide(
+                                color: ColorModel.primaryColor, width: 1.5)),
+                        suffixIcon: IconButton(
+                          color: ColorModel.primaryColor,
+                          icon: const Icon(Icons.search_outlined),
+                          onPressed: () {
+                            setState(() {});
+                          },
+                        ),
+                        labelStyle:
+                            const TextStyle().copyWith(color: Colors.grey),
+                        contentPadding: const EdgeInsets.all(12),
                       ),
                     ),
-            ),
-            const SizedBox(height: 90),
-          ],
-        ),
+                  ),
+                  Expanded(
+                    child: search.text == ""
+                        ? (themeProvider.cityBookMark.isNotEmpty)
+                            ? SingleChildScrollView(
+                                physics: const BouncingScrollPhysics(),
+                                child: Column(
+                                  children: themeProvider.cityBookMark.map((e) {
+                                    return (e != "")
+                                        ? bookMarkCityWeather(context, e)
+                                        : const SizedBox();
+                                  }).toList(),
+                                ),
+                              )
+                            : Center(
+                                child:
+                                    appText(text: "Bookmark list is empty..."),
+                              )
+                        : Consumer<SearchCityProvider>(
+                            builder: (context, scp, child) => FutureBuilder(
+                              future: scp.searchCity(search.text),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return (snapshot.data!.isNotEmpty)
+                                      ? SingleChildScrollView(
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          child: Column(
+                                            children: snapshot.data!.map((e) {
+                                              return (e.url != null)
+                                                  ? bookMarkCityWeather(
+                                                      context, e.url as String)
+                                                  : const SizedBox();
+                                            }).toList(),
+                                          ),
+                                        )
+                                      : Center(
+                                          child: appText(
+                                              text: "Data not found..."),
+                                        );
+                                } else if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text(snapshot.error.toString()),
+                                  );
+                                } else {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                        color: ColorModel.primaryColor),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                  ),
+                  const SizedBox(height: 90),
+                ],
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    appText(text: "Internet connection is not available..."),
+                    IconButton(
+                        onPressed: () {
+                          themeProvider.checkConnectivity();
+                        },
+                        icon: Icon(Icons.replay_circle_filled_rounded,
+                            color: ColorModel.primaryColor),
+                        iconSize: 35),
+                  ],
+                ),
+              ),
       ),
     );
   }
@@ -145,10 +172,11 @@ class _CityBookMarkState extends State<CityBookMark> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   width: MediaQuery.of(context).size.width - 16,
                   height: (MediaQuery.of(context).size.width - 16) * 0.47368421,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/bookmarkbkg.png"),
-                        fit: BoxFit.fitWidth),
+                      image: AssetImage(ColorModel.bookMarkBkg),
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,13 +188,11 @@ class _CityBookMarkState extends State<CityBookMark> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const SizedBox(height: 16),
-                            appText(
-                                size: 40, text: '$temp°', color: Colors.white),
-                            appText(
+                            colorText(size: 40, text: '$temp°'),
+                            colorText(
                                 text: "$city, $country",
                                 size: 16,
-                                fw: FontWeight.w500,
-                                color: Colors.white),
+                                fw: FontWeight.w500),
                             const SizedBox(height: 19),
                           ],
                         ),
@@ -177,11 +203,10 @@ class _CityBookMarkState extends State<CityBookMark> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.network(cIconUrl, scale: 0.70),
-                            appText(
+                            colorText(
                               text: "$cText",
                               size: 16,
                               fw: FontWeight.w400,
-                              color: Colors.white,
                               alignCenter: true,
                             ),
                             const SizedBox(height: 16),
@@ -197,7 +222,7 @@ class _CityBookMarkState extends State<CityBookMark> {
                 child: Text(snapshot.error.toString()),
               );
             } else {
-              return const Center(
+              return Center(
                 child:
                     CircularProgressIndicator(color: ColorModel.primaryColor),
               );

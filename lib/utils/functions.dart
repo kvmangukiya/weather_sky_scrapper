@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:weather_sky_scrapper/models/color_model.dart';
@@ -5,12 +6,12 @@ import 'package:weather_sky_scrapper/models/color_model.dart';
 void mySnackBar(
     {required BuildContext context,
     required String msg,
-    Color bkgColor = ColorModel.primaryColor,
+    Color bkgColor = CupertinoColors.systemBackground,
     Color textColor = Colors.white}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: appText(text: msg, color: textColor),
-      backgroundColor: bkgColor,
+      content: colorText(text: msg, color: textColor),
+      backgroundColor: ColorModel.primaryColor,
       behavior: SnackBarBehavior.floating,
       duration: const Duration(seconds: 1),
     ),
@@ -21,8 +22,28 @@ void mySnackBar(
 Widget appText(
     {required String text,
     FontWeight fw = FontWeight.normal,
-    Color color = ColorModel.primaryColor,
     double size = 18,
+    int maxLines = 0,
+    bool overflow = false,
+    bool alignCenter = false}) {
+  return Text(
+    text,
+    textAlign: alignCenter == true ? TextAlign.center : null,
+    maxLines: maxLines == 0 ? null : maxLines,
+    overflow: overflow == true ? TextOverflow.ellipsis : null,
+    style: TextStyle(
+      color: ColorModel.primaryColor,
+      fontSize: size,
+      fontWeight: fw,
+    ),
+  );
+}
+
+Widget colorText(
+    {required String text,
+    FontWeight fw = FontWeight.normal,
+    double size = 18,
+    Color color = const Color.fromRGBO(255, 255, 255, 1),
     int maxLines = 0,
     bool overflow = false,
     bool alignCenter = false}) {
@@ -48,7 +69,7 @@ Widget customListTile({
   String text = '',
 }) {
   return ListTile(
-    trailing: appText(size: 16, text: text, color: ColorModel.darkGreyColor),
+    trailing: colorText(size: 16, text: text, color: ColorModel.darkGreyColor),
     leading: Icon(icon, color: iconColor),
     title: RichText(
       maxLines: 1,
@@ -61,7 +82,7 @@ Widget customListTile({
           ),
           TextSpan(
             text: second,
-            style: const TextStyle(
+            style: TextStyle(
                 color: ColorModel.primaryColor,
                 fontSize: 16,
                 fontWeight: FontWeight.w500),

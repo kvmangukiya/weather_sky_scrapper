@@ -16,11 +16,12 @@ class CityWeather extends StatelessWidget {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: ColorModel.pageBkgColor,
             image: DecorationImage(
-                image: AssetImage("assets/images/citybkg.jpg"),
-                fit: BoxFit.fitHeight),
+              image: AssetImage(ColorModel.cityBkg),
+              fit: BoxFit.fitHeight,
+            ),
           ),
           child: Column(
             children: [
@@ -102,7 +103,7 @@ class CityWeather extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     appText(size: 50, text: '$temp°'),
-                                    appText(
+                                    colorText(
                                         size: 20,
                                         text: '$feelTemp°',
                                         color: ColorModel.darkGreyColor),
@@ -127,14 +128,13 @@ class CityWeather extends StatelessWidget {
                                           children: [
                                             appText(
                                               size: 20,
-                                              color: ColorModel.primaryColor,
                                               text: 'Wind',
                                               fw: FontWeight.bold,
                                             ),
                                             RotationTransition(
                                               turns: AlwaysStoppedAnimation(
                                                   windDegree! / 360),
-                                              child: const Icon(Icons.north,
+                                              child: Icon(Icons.north,
                                                   color:
                                                       ColorModel.primaryColor),
                                             ),
@@ -180,7 +180,6 @@ class CityWeather extends StatelessWidget {
                                             const EdgeInsets.only(left: 10),
                                         child: appText(
                                           size: 20,
-                                          color: ColorModel.primaryColor,
                                           text: 'Barometer',
                                           fw: FontWeight.bold,
                                         ),
@@ -232,7 +231,7 @@ class CityWeather extends StatelessWidget {
                           child: Text(snapshot.error.toString()),
                         );
                       } else {
-                        return const Center(
+                        return Center(
                           child: CircularProgressIndicator(
                               color: ColorModel.primaryColor),
                         );
