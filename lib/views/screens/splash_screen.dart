@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_sky_scrapper/controllers/theme_provider.dart';
 import '../../controllers/current_weather_provider.dart';
 import '../../models/color_model.dart';
 
@@ -22,12 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Provider.of<GitaProvider>(context, listen: false)
-    //   ..chaptersJson()
-    //   ..verseJson()
-    //   ..verseTranslationJson()
-    //   ..commentaryJson()
-    //   ..getBookMark();
+    Provider.of<ThemeProvider>(context, listen: false).getBookMark();
 
     return Scaffold(
       body: Center(

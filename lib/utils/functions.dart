@@ -2,6 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:weather_sky_scrapper/models/color_model.dart';
 
+void mySnackBar(
+    {required BuildContext context,
+    required String msg,
+    Color bkgColor = ColorModel.primaryColor,
+    Color textColor = Colors.white}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: appText(text: msg, color: textColor),
+      backgroundColor: bkgColor,
+      behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 1),
+    ),
+  );
+}
+
 // custom Text Widget
 Widget appText(
     {required String text,

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_sky_scrapper/models/current_weather.dart';
-import 'package:weather_sky_scrapper/models/ip_model.dart';
 import '../utils/api_utils.dart';
 import '../utils/functions.dart';
 
 class CurrentWeatherProvider extends ChangeNotifier {
   late CurrentWeather currentWeather;
-  late IPModel ipModel;
   static double latitude = 0;
   static double longitude = 0;
 
@@ -37,25 +35,6 @@ class CurrentWeatherProvider extends ChangeNotifier {
     var response2 = await http.get(url);
     if (response2.statusCode == 200) {
       currentWeather = currentWeatherFromJson(response2.body);
-    } else {
-      myToast("Something went wrong!");
-    }
-    return currentWeather;
-  }
-
-  Future<CurrentWeather> ipCurrentWeather() async {
-    Uri url = Uri.parse("${WeatherApiUtils.baseUrl}"
-        "/${WeatherApiUtils.api}"
-        "?key=${WeatherApiUtils.key}"
-        "&q=auto:ip"
-        "&aqi=${WeatherApiUtils.aqi}");
-    var response3 = await http.get(url);
-    if (response3.statusCode == 200) {
-      debugPrint("##########################");
-      debugPrint(response3.body);
-      debugPrint("##########################");
-      currentWeather = currentWeatherFromJson(response3.body);
-      // notifyListeners();
     } else {
       myToast("Something went wrong!");
     }

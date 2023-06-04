@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import '../../models/color_model.dart';
-import 'city_weather.dart';
-import 'package:provider/provider.dart';
 import '../../controllers/theme_provider.dart';
-import '../../utils/functions.dart';
+import 'home_city_weather.dart';
+import 'settings.dart';
+import 'city_bookmark.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,8 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Controller to handle bottom nav bar and also handles initial page
   final _controller = NotchBottomBarController(index: 0);
-
-  int maxCount = 5;
+  int maxCount = 3;
 
   @override
   void dispose() {
@@ -30,97 +30,88 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// widget list
   final List<Widget> bottomBarPages = [
-    const CityWeather(),
-    const Page2(),
-    const Page3(),
+    const HomeCityWeather(),
+    const CityBookMark(),
+    const Settings(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: List.generate(
-            bottomBarPages.length, (index) => bottomBarPages[index]),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) => Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: ColorModel.pageBkgColor,
+            image: DecorationImage(
+                image: AssetImage("assets/images/citybkg.jpg"),
+                fit: BoxFit.fitHeight),
+          ),
+          child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: List.generate(
+                bottomBarPages.length, (index) => bottomBarPages[index]),
+          ),
+        ),
+        extendBody: true,
+        bottomNavigationBar: (bottomBarPages.length <= maxCount)
+            ? AnimatedNotchBottomBar(
+                /// Provide NotchBottomBarController
+                notchBottomBarController: _controller,
+                color: ColorModel.primaryColor,
+                showLabel: false,
+                notchColor: ColorModel.notchColor,
+
+                /// restart app if you change removeMargins
+                removeMargins: false,
+                bottomBarWidth: 500,
+                durationInMilliSeconds: 300,
+                bottomBarItems: const [
+                  BottomBarItem(
+                    inActiveItem: Icon(
+                      Icons.home_filled,
+                      color: ColorModel.notchColor,
+                    ),
+                    activeItem: Icon(
+                      Icons.home_filled,
+                      color: ColorModel.primaryColor,
+                    ),
+                    itemLabel: 'Page 1',
+                  ),
+                  BottomBarItem(
+                    inActiveItem: Icon(
+                      Icons.saved_search,
+                      color: ColorModel.notchColor,
+                    ),
+                    activeItem: Icon(
+                      Icons.saved_search,
+                      color: ColorModel.primaryColor,
+                    ),
+                    itemLabel: 'Page 2',
+                  ),
+                  BottomBarItem(
+                    inActiveItem: Icon(
+                      Icons.settings,
+                      color: ColorModel.notchColor,
+                    ),
+                    activeItem: Icon(
+                      Icons.settings,
+                      color: ColorModel.primaryColor,
+                    ),
+                    itemLabel: 'Page 3',
+                  ),
+                ],
+                onTap: (index) {
+                  /// perform action on tab change and to update pages you can update pages without pages
+                  ThemeProvider.selPageIndex = index;
+                  _pageController.jumpToPage(index);
+                },
+              )
+            : null,
       ),
-      extendBody: true,
-      bottomNavigationBar: (bottomBarPages.length <= maxCount)
-          ? AnimatedNotchBottomBar(
-              /// Provide NotchBottomBarController
-              notchBottomBarController: _controller,
-              color: ColorModel.primaryColor,
-              showLabel: false,
-              notchColor: ColorModel.notchColor,
-
-              /// restart app if you change removeMargins
-              removeMargins: false,
-              bottomBarWidth: 500,
-              durationInMilliSeconds: 300,
-              bottomBarItems: [
-                BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.home_filled,
-                    color: ColorModel.notchColor,
-                  ),
-                  activeItem: Icon(
-                    Icons.home_filled,
-                    color: ColorModel.primaryColor,
-                  ),
-                  itemLabel: 'Page 1',
-                ),
-                BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.saved_search,
-                    color: ColorModel.notchColor,
-                  ),
-                  activeItem: Icon(
-                    Icons.saved_search,
-                    color: ColorModel.primaryColor,
-                  ),
-                  itemLabel: 'Page 2',
-                ),
-                BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.settings,
-                    color: ColorModel.notchColor,
-                  ),
-                  activeItem: Icon(
-                    Icons.settings,
-                    color: ColorModel.primaryColor,
-                  ),
-                  itemLabel: 'Page 3',
-                ),
-              ],
-              onTap: (index) {
-                /// perform action on tab change and to update pages you can update pages without pages
-                debugPrint('current selected index $index');
-                _pageController.jumpToPage(index);
-              },
-            )
-          : null,
     );
-  }
-}
-
-class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: ColorModel.pageBkgColor,
-        child: const Center(child: Text('Page 2')));
-  }
-}
-
-class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: ColorModel.pageBkgColor,
-        child: const Center(child: Text('Page 3')));
   }
 }
