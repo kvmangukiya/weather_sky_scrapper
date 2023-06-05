@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Bhagavad Gita',
+        title: 'Weather App',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: const ColorScheme.light(),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:weather_sky_scrapper/models/color_model.dart';
@@ -6,7 +5,6 @@ import 'package:weather_sky_scrapper/models/color_model.dart';
 void mySnackBar(
     {required BuildContext context,
     required String msg,
-    Color bkgColor = CupertinoColors.systemBackground,
     Color textColor = Colors.white}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(

@@ -18,6 +18,7 @@ class _CityBookMarkState extends State<CityBookMark> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ThemeProvider>(context, listen: false).checkConnectivity();
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) => Container(
         padding: const EdgeInsets.all(16),
@@ -89,8 +90,9 @@ class _CityBookMarkState extends State<CityBookMark> {
                                 ),
                               )
                             : Center(
-                                child:
-                                    appText(text: "Bookmark list is empty..."),
+                                child: appText(
+                                    text: "Bookmark list is empty...",
+                                    fw: FontWeight.w500),
                               )
                         : Consumer<SearchCityProvider>(
                             builder: (context, scp, child) => FutureBuilder(
@@ -135,7 +137,9 @@ class _CityBookMarkState extends State<CityBookMark> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    appText(text: "Internet connection is not available..."),
+                    appText(
+                        text: "Internet connection is not available...",
+                        fw: FontWeight.w500),
                     IconButton(
                         onPressed: () {
                           themeProvider.checkConnectivity();
@@ -171,7 +175,8 @@ class _CityBookMarkState extends State<CityBookMark> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   width: MediaQuery.of(context).size.width - 16,
-                  height: (MediaQuery.of(context).size.width - 16) * 0.47368421,
+                  height:
+                      (MediaQuery.of(context).size.width - 16) * 0.47368421 + 9,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(ColorModel.bookMarkBkg),
@@ -193,7 +198,7 @@ class _CityBookMarkState extends State<CityBookMark> {
                                 text: "$city, $country",
                                 size: 16,
                                 fw: FontWeight.w500),
-                            const SizedBox(height: 19),
+                            const SizedBox(height: 22),
                           ],
                         ),
                       ),

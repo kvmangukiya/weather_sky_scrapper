@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: PageView(
             controller: _pageController,
-            physics: const BouncingScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: List.generate(
                 bottomBarPages.length, (index) => bottomBarPages[index]),
           ),

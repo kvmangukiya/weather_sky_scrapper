@@ -238,7 +238,9 @@ class HomeCityWeather extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    appText(text: "Internet connection is not available..."),
+                    appText(
+                        text: "Internet connection is not available...",
+                        fw: FontWeight.w500),
                     IconButton(
                         onPressed: () {
                           themeProvider.checkConnectivity();
