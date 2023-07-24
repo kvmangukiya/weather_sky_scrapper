@@ -1,3 +1,4 @@
+
 # Weather App (Sky Scrapper)
 
 https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/4a6e7b99-d8a2-40a4-84bd-2b14afb7eec8
@@ -41,3 +42,15 @@ daily forecasts, precipitation chances, and sunrise/sunset times. Users can expl
 - Understanding of user interface design principles and best practices.
 - Experience with mobile app development and related tools like Android Studio or VS Code.
 - Ability to work independently.
+
+## Screenshots:
+
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/53c0d777-7a2c-4fe2-aa6e-8e3beb13e041" alt="01" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/3979933e-55c0-4cab-8cce-83a9a501a881" alt="02" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/1134dfac-3d82-4485-9654-aa1343cfbff1" alt="03" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/ee977fad-08aa-4165-adf5-9fc20677d631" alt="04" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/eadd1c08-37e6-4647-a872-6e42e4a38ce7" alt="05" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/ad06fed8-823b-4593-9482-469dd9e44ed4" alt="06" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/30146f57-b985-4438-afe2-a5fc3c90bb33" alt="07" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/ad521d92-5a89-4b80-9f6b-248e24e4416f" alt="08" width="224" height="500"></img>
+<img src="https://github.com/kvmangukiya/weather_sky_scrapper/assets/130810865/ffd7fa42-5ef1-43e8-af71-acc6e1542827" alt="09" width="224" height="500"></img>
