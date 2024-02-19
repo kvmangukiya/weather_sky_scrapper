@@ -9,7 +9,7 @@ class SearchCityProvider extends ChangeNotifier {
 
   Future<List<SearchCityModel>> searchCity(String searchText) async {
     searchCityModel.clear();
-    // http://api.weatherapi.com/v1/search.json?key=b94da5b2d72e4e26a5d132250233105&q=Surat
+    // http://api.weatherapi.com/v1/search.json?key=0000&q=Surat
     Uri url = Uri.parse("${WeatherApiUtils.baseUrl}"
         "/${WeatherApiUtils.searchApi}"
         "?key=${WeatherApiUtils.key}"
