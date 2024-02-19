@@ -10,7 +10,7 @@ class CurrentWeatherProvider extends ChangeNotifier {
   static double longitude = 0;
 
   Future<CurrentWeather> cityCurrentWeather(String city) async {
-    // http://api.weatherapi.com/v1/current.json?key=b94da5b2d72e4e26a5d132250233105&q=Surat&aqi=no
+    // http://api.weatherapi.com/v1/current.json?key=0000000&q=Surat&aqi=no
     Uri url = Uri.parse("${WeatherApiUtils.baseUrl}"
         "/${WeatherApiUtils.api}"
         "?key=${WeatherApiUtils.key}"
